@@ -11,7 +11,7 @@
         height: 200px;
         background: 
         linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-        url("images/film-img1.png");
+        url("images/movie-head.png");
         background-position: 50% 22%;
         background-size: cover;
         max-width: 700px;
@@ -191,6 +191,11 @@
 
 
     /* WATCHLIST CSS */
+    .watchlist-container {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+    }
     .empty {
         margin: 0;
         font-weight: 700;
@@ -203,6 +208,7 @@
         align-items: center;
         justify-content: center;
         height: calc(100vh - 250px);
+        color: red;
         gap: 20px;
     }
 
@@ -242,7 +248,7 @@
         height: 25vh;
         background: 
         linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-        url("images/film-img1.png");
+        url("images/movie-head.png");
         background-position: 50% 22%;
         background-size: cover;
         gap: 120px;
@@ -422,6 +428,12 @@
 
 
     /* WATCHLIST CSS */
+    .watchlist-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin: 0 auto;
+    }
+    
     .empty {
         margin: 0;
         font-weight: 700;
@@ -429,6 +441,7 @@
     }
 
     .watchlist-inner {
+        grid-column: 1 / -1;
         display: flex;
         flex-direction: column;
         align-items: center;

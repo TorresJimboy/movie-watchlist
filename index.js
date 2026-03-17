@@ -8,59 +8,41 @@ const searchResult = document.getElementById('movies-container')
 const movies = document.getElementById('movies')
 const moviesData = {}
 
-const isIndex = window.location.pathname.endsWith('index.html')
-const isWatchlist = window.location.pathname.endsWith('watchlist.html')
-
 // Apply saved theme on load
 const savedTheme = localStorage.getItem('theme')
 if (savedTheme === 'dark') {
     body.classList.add('dark-mode')
     toggleBtn.textContent = 'Dark'
-
-    // if (isWatchlist) {
-    //     empty.style.color = '#787878'
-    //     addLink.style.color = '#ffffff'
-    //     addIcon.src = '/images/add-icon2.png'
-    //     addIcon.style.background = '#ffffff'
-    // }
 }
 
-// Toggle theme function
+// Toggle theme
 function toggleTheme() {
     body.classList.toggle('dark-mode')
 
     if (toggleBtn.textContent === 'Light') {
         localStorage.setItem('theme', 'dark')
         toggleBtn.textContent = 'Dark'
-
-        // if (isWatchlist) {
-        //     empty.style.color = '#787878'
-        //     addLink.style.color = '#ffffff'
-        //     addIcon.src = '/images/add-icon2.png'
-        //     addIcon.style.background = '#ffffff'
-        // }
     } else {
         localStorage.setItem('theme', 'light')
         toggleBtn.textContent = 'Light'
-
-        // if (isWatchlist) {
-        //     empty.style.color = '#DFDDDD'
-        //     addLink.style.color = 'black'
-        //     addIcon.src = '/images/plus-icon.png'
-        //     addIcon.style.background = ''
-        // }
     }
 }
 
-toggleBtn.addEventListener('click', toggleTheme)
+if (toggleBtn) {
+    toggleBtn.addEventListener('click', toggleTheme)
+}
 
-// Api functions
+// API Elements
 const searchBtn = document.getElementById('search-btn')
 const searchInput = document.getElementById('movie-search')
 
+// Search function
 function searchMovie() {
     const searched = searchInput.value
     const holder = document.getElementById('holder')
+
+    if (!searched) return
+
     const title = searched.charAt(0).toUpperCase() + searched.slice(1).toLowerCase()
     searchInput.value = ""
     
@@ -69,12 +51,11 @@ function searchMovie() {
     .then(data => {
         if (data.Response === "True") {
 
-            holder.hidden = true
+            if (holder) holder.hidden = true
             searchResult.innerHTML = ""
 
             data.Search.forEach(movie => {
 
-                // Fetch full details per movie
                 fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${movie.imdbID}`)
                     .then(res => res.json())
                     .then(fullData => {
@@ -95,9 +76,7 @@ function searchMovie() {
                                     </button>
                                 </div>
                                 <div class="desc-end">
-                                    <p class="plot">
-                                        ${fullData.Plot}
-                                    </p>
+                                    <p class="plot">${fullData.Plot}</p>
                                 </div>
                             </div>
                         </div>
@@ -113,55 +92,58 @@ function searchMovie() {
     })
 }
 
-if (isIndex) {
-    //Search Button Submit
-    searchBtn.addEventListener('click', searchMovie)    
-    // Enter to submit
+// ✅ Attach search only if elements exist
+if (searchBtn && searchInput) {
+    searchBtn.addEventListener('click', searchMovie)
+
     searchInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        searchMovie()
-    }
-    })
-    //Add to Watchlist
-    searchResult.addEventListener('click', function(e) {
-    if (e.target.closest('.add-movie')) {
-
-        const button = e.target.closest('.add-movie')
-        const movieId = button.dataset.id
-
-        const movieData = moviesData[movieId]
-
-        // Get existing watchlist (or empty array)
-        const watchlist = JSON.parse(localStorage.getItem('watchlist')) || []
-
-        // Prevent duplicates
-        const alreadyAdded = watchlist.some(movie => movie.imdbID === movieId)
-
-        if (!alreadyAdded) {
-            watchlist.push(movieData)
-            localStorage.setItem('watchlist', JSON.stringify(watchlist))
-            console.log("Added to watchlist:", movieData)
-        } else {
-            console.log("Movie already in watchlist")
+        if (e.key === 'Enter') {
+            searchMovie()
         }
-    }
-})
+    })
 }
 
-if (isWatchlist) {
-    const watchList = document.getElementById('watchlist-container')
+// Add to Watchlist
+if (searchResult) {
+    searchResult.addEventListener('click', function(e) {
+        if (e.target.closest('.add-movie')) {
+
+            const button = e.target.closest('.add-movie')
+            const movieId = button.dataset.id
+            const movieData = moviesData[movieId]
+
+            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || []
+
+            const alreadyAdded = watchlist.some(movie => movie.imdbID === movieId)
+
+            if (!alreadyAdded) {
+                watchlist.push(movieData)
+                localStorage.setItem('watchlist', JSON.stringify(watchlist))
+                console.log("Added to watchlist:", movieData)
+            } else {
+                console.log("Movie already in watchlist")
+            }
+        }
+    })
+}
+
+// Watchlist Page
+const watchList = document.getElementById('watchlist-container')
+
+if (watchList) {
 
     function renderWatchlist() {
-        
         const storedMovies = JSON.parse(localStorage.getItem('watchlist')) || []
+
         if (storedMovies.length === 0) {
             watchList.innerHTML = ` 
-            <div class="watchlist-inner" id="watchlist-inner">
+            <div class="watchlist-inner">
                 <h2 class="empty">Your watchlist is looking a little empty...</h2>
                 <div class="more-vids">
-                    <a class="add-container" id="add-movies" href="index.html" >
-                    <img src="images/plus-icon.png" class="add-icon" id="add-icon">
-                    Let's add some movies!</a>
+                    <a class="add-container" href="index.html">
+                        <img src="images/plus-icon.png" class="add-icon">
+                        Let's add some movies!
+                    </a>
                 </div>
             </div>
             `
@@ -187,34 +169,27 @@ if (isWatchlist) {
                             </button>
                         </div>
                         <div class="desc-end">
-                            <p class="plot">
-                                ${movieData.Plot}
-                            </p>
+                            <p class="plot">${movieData.Plot}</p>
                         </div>
                     </div>
                 </div>
             `
         })
     }
-        watchList.addEventListener('click', function(e) {
-            if (e.target.classList.contains('remove-movie')) {
-                const movieId = e.target.dataset.id
 
-                let storedMovies = JSON.parse(localStorage.getItem('watchlist')) || []
+    watchList.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-movie')) {
+            const movieId = e.target.dataset.id
 
-                // remove the movie
-                storedMovies = storedMovies.filter(movie => movie.imdbID !== movieId)
+            let storedMovies = JSON.parse(localStorage.getItem('watchlist')) || []
 
-                // save updated array
-                localStorage.setItem('watchlist', JSON.stringify(storedMovies))
+            storedMovies = storedMovies.filter(movie => movie.imdbID !== movieId)
 
-                // re-render UI
-                renderWatchlist()
-            }
-        })
-        renderWatchlist()
+            localStorage.setItem('watchlist', JSON.stringify(storedMovies))
+
+            renderWatchlist()
+        }
+    })
+
+    renderWatchlist()
 }
-
-
-
-

@@ -68,14 +68,14 @@ h1 {
     position: absolute;
     top: 0;
     right: 0;
-    width: 90px; 
-    height: 36px; 
+    width: 90px;
+    height: 36px;
     font-size: 1rem;
     font-weight: 700;
-    border-radius: 0 0 0 12px; 
+    border-radius: 0 0 0 12px;
     border: none;
     cursor: pointer;
-    background-color: #0ea5e9; 
+    background-color: #0ea5e9;
     color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
@@ -84,7 +84,7 @@ h1 {
 
 .theme-toggle:hover {
     background-color: #0284c7;
-    transform: translateY(-2px); 
+    transform: translateY(-2px);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -164,13 +164,16 @@ button {
         transform: translate(-50%, -50%) scale(0);
         opacity: 0;
     }
+
     50% {
         transform: translate(-50%, -50%) scale(1.2) rotate(5deg);
         opacity: 1;
     }
+
     70% {
         transform: translate(-50%, -50%) scale(0.9) rotate(-5deg);
     }
+
     100% {
         transform: translate(-50%, -50%) scale(1) rotate(0deg);
     }
@@ -369,6 +372,12 @@ h2 {
 
 .empty {
     font-weight: 700;
+}
+
+@media (max-width: 600px) {
+    #search-btn {
+        font-size: .75rem;
+    }
 }
 
 /* =========================

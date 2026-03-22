@@ -1,472 +1,410 @@
-@media (max-width: 700px) {
-    html, body {
+/* =========================
+   RESET & BASE
+========================= */
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
-    }
+    font-family: Arial, sans-serif;
+}
 
-    nav {
-        display: flex;
-        align-items: center;
-        height: 200px;
-        background: 
-        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+/* =========================
+   THEME
+========================= */
+body.dark-mode {
+    background-color: #121212;
+}
+
+body.dark-mode .title {
+    color: white;
+}
+
+body.dark-mode .movie {
+    color: white;
+}
+
+body.dark-mode .watchlist-inner a {
+    color: #fff;
+}
+
+body.dark-mode #search-btn {
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
+}
+
+/* =========================
+   NAVBAR
+========================= */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 200px;
+    padding: 0 20px;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
         url("images/movie-head.png");
-        background-position: 50% 22%;
-        background-size: cover;
-        max-width: 700px;
-    }
+    background-position: 50% 22%;
+    background-size: cover;
+}
 
-    .theme-toggle {
-        position: absolute;
-        margin: 0;
-        left: auto;
-        right: 0;
-        bottom: auto;
-        top: 0;
-        width: 80px;
-        height: 30px;
-        font-size: 1rem;
-        font-weight: 700;
-        border-radius: 0 0 0 10px;
-        padding-left: 1.25rem;
-    }
+h1 {
+    font-weight: 800;
+    font-size: 2rem;
+    color: #ffffff;
+}
 
-    .dark-mode {
-        background-color: #121212;
-    }
+.watchlist-link {
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #ffffff;
+    text-decoration: none;
+}
 
-    h1 {
-        font-weight: 800;
-        font-size: 2.5rem;
-        color: #ffffff;
-        margin-right: auto;
-        margin-left: 40px
-    }
-
-    .watchlist-link {
-        font-weight: 700;
-        font-size: 0.875rem;
-        color: #ffffff;
-        margin-left: auto;
-        margin-right: 40px;
-        text-decoration: none;
-    }
-
-    main {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .search-bar {
-        display: flex;
-        height: 36px;
-        width: 500px;
-        margin: -18px auto 0 auto;
-        border: 1px solid #D1D5DB;
-        border-radius: 12px;
-        overflow: hidden;
-    }
-
-    .search-input {
-        display: flex;
-        align-items: center;
-        flex: 1;
-        padding: 12px 16px;
-        background: #ffffff;
-    }
-
-    .search-input input {
-        border: none;
-        background: transparent;
-        outline: none;
-        flex: 1;
-        font-size: 18px;
-    }
-
-    .search-icon {
-        margin-right: 10px;
-        width: 20px;
-    }
-
-    button {
-        padding: 0 24px;
-        border: none;
-        border-left: 1px solid #D1D5DB;
-        background: #ffffff;
-        font-size: 18px;
-        color: #374151;
-        cursor: pointer;
-    }
-
-    .movies-container {
-        margin: 0 auto;
-        padding: 0;
-    }
-
-    .hold {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: calc(100vh - 250px);
-        gap: 10px;
-    }
-
-    i {
-        margin: 0;
-        font-size: 4.375rem;
-        color: #DFDDDD;
-    }
-
-    h2 {
-        margin: 0;
-        font-weight: 700;
-        color: #DFDDDD;
-        font-size: 1.125rem;
-    }
-    /* Movies */
-    .movie {
-        margin: 0;
-        padding: 20px 0;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        border-bottom: 1px solid #E5E7EB;
-        font-size: 0.75rem;
-        font-weight: 400;
-        color: #111827;
-        gap: 1.25rem;
-        width: 500px;
-    }
-
-    .poster {
-        width: 7rem;
-        aspect-ratio: 5/7;
-    }
-
-    .description {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .desc-top{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .title {
-        color: #000000;
-        font-weight: 500;
-        font-size: 18px;
-    }
-
-    .desc-mid {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .add-movie {
-        display: flex;
-        align-items: center;
-        background: transparent;
-        border: none;
-        font-size: 12px;
-        padding: 0;
-        gap: 2px;
-    }
-
-    .desc-end {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        color: #6B7280;
-    }
+/* =========================
+   THEME TOGGLE
+========================= */
+.theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 90px; 
+    height: 36px; 
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 0 0 0 12px; 
+    border: none;
+    cursor: pointer;
+    background-color: #0ea5e9; 
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
 
 
-    /* WATCHLIST CSS */
-    .watchlist-container {
-        display: flex;
-        flex-direction: column;
-        margin: 0 auto;
-    }
-    .empty {
-        margin: 0;
-        font-weight: 700;
-        font-size: 1.125rem;
-    }
+.theme-toggle:hover {
+    background-color: #0284c7;
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
 
-    .watchlist-inner {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: calc(100vh - 250px);
-        color: red;
-        gap: 20px;
-    }
 
-    .watchlist-inner a {
-        color: #363636;
-        font-weight: 700;
-        font-size: 14px;
-        text-decoration: none;
-    }
+.theme-toggle:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
 
-    .add-container {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
+/* =========================
+   SEARCH BAR
+========================= */
+#search-btn {
+    color: #374151;
+    transition: all 0.2s ease;
+}
 
-    .add-icon {
-        width: 1.125rem;
-        height: 1.125rem;
-        border-radius: 50%;
+#search-btn:hover {
+    color: #0ea5e9;
+    text-shadow: 0 0 6px rgba(14, 165, 233, 0.6);
+}
+
+.search-bar {
+    display: flex;
+    height: 36px;
+    width: 90%;
+    margin: -18px auto 0;
+    border: 1px solid #D1D5DB;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.search-input {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding: 12px 16px;
+    background: #ffffff;
+}
+
+.search-input input {
+    border: none;
+    background: transparent;
+    outline: none;
+    flex: 1;
+    font-size: 16px;
+}
+
+.search-icon {
+    margin-right: 10px;
+    width: 20px;
+}
+
+button {
+    padding: 0 16px;
+    border: none;
+    border-left: 1px solid #D1D5DB;
+    background: #ffffff;
+    font-size: 16px;
+    color: #374151;
+    cursor: pointer;
+}
+
+.not-found {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+    color: #ff4d4d;
+    animation: popShake 1s ease forwards;
+}
+
+@keyframes popShake {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2) rotate(5deg);
+        opacity: 1;
+    }
+    70% {
+        transform: translate(-50%, -50%) scale(0.9) rotate(-5deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
     }
 }
 
-/* Desktop */
+body.dark-mode .not-found h2 {
+    color: #D1D5DB;
+}
+
+body.dark-mode .not-found p {
+    color: #9CA3AF;
+}
+
+/* =========================
+   MOVIES CONTAINER
+========================= */
+.movies-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+.hold {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 250px);
+}
+
+i {
+    font-size: 4rem;
+    color: #DFDDDD;
+}
+
+h2 {
+    margin: 0;
+    font-weight: 700;
+    color: #DFDDDD;
+}
+
+/* =========================
+   MOVIE CARD
+========================= */
+.movie {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    border-bottom: 1px solid #E5E7EB;
+    padding: 20px 10px;
+    width: 100%;
+    max-width: 500px;
+    color: #111827;
+}
+
+.poster {
+    width: 7rem;
+    aspect-ratio: 5/7;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(14, 165, 233, 0.6);
+    transition: all 0.3s ease;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+}
+
+.desc-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 18px;
+    color: black;
+}
+
+.desc-mid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.desc-end {
+    color: #6B7280;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background-color: #22c55e;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1000;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateY(-30px);
+}
+
+.notification.already {
+    background-color: #f87171;
+}
+
+.add-movie {
+    padding-left: 5px !important;
+}
+
+.add-movie,
+.remove-movie {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #0ea5e9, #22d3ee);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.add-movie:hover,
+.remove-movie:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.add-movie:active,
+.remove-movie:active {
+    transform: scale(0.95);
+}
+
+.remove-movie {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.add-movie:hover .add-icon {
+    transform: rotate(90deg);
+    transition: transform 0.2s ease;
+}
+
+.add-icon {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+}
+
+/* =========================
+   WATCHLIST
+========================= */
+.watchlist-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.watchlist-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 250px);
+    gap: 20px;
+}
+
+.watchlist-inner a {
+    color: #363636;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.empty {
+    font-weight: 700;
+}
+
+/* =========================
+   DESKTOP
+========================= */
 @media (min-width: 701px) {
-     html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-    }
 
     nav {
-        display: flex;
-        align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 25vh;
-        background: 
-        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-        url("images/movie-head.png");
-        background-position: 50% 22%;
-        background-size: cover;
         gap: 120px;
-    }
-
-    .theme-toggle {
-        position: absolute;
-        margin: 0;
-        left: auto;
-        right: 0;
-        bottom: auto;
-        top: 0;
-        width: 80px;
-        height: 30px;
-        font-size: 1rem;
-        font-weight: 700;
-        border-radius: 0 0 0 10px;
-        padding-left: 1.25rem;
-    }
-
-    .dark-mode {
-        background-color: #121212;
-    }
-
-    h1 {
-        font-weight: 800;
-        font-size: 2.5rem;
-        color: #ffffff;
-    }
-
-    .watchlist-link {
-        font-weight: 700;
-        font-size: 0.875rem;
-        color: #ffffff;
-        text-decoration: none;
-    }
-
-    main {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
+        height: 25vh;
     }
 
     .search-bar {
-        display: flex;
-        height: 36px;
         width: 70vw;
-        margin: -18px auto 0 auto;
-        border: 1px solid #D1D5DB;
-        border-radius: 12px;
-        overflow: hidden;
-    }
-
-    .search-input {
-        display: flex;
-        align-items: center;
-        flex: 1;
-        padding: 12px 16px;
-        background: #ffffff;
-    }
-
-    .search-input input {
-        border: none;
-        background: transparent;
-        outline: none;
-        flex: 1;
-        font-size: 18px;
-    }
-
-    .search-icon {
-        margin-right: 10px;
-        width: 20px;
-    }
-
-    button {
-        padding: 0 24px;
-        border: none;
-        border-left: 1px solid #D1D5DB;
-        background: #ffffff;
-        font-size: 18px;
-        color: #374151;
-        cursor: pointer;
     }
 
     .movies-container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        margin: 0 auto;
-        padding: 0;
-        flex: 2;
+        justify-items: center;
+        padding: 0 300px;
     }
 
-    .hold {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: calc(100vh - 250px);
-        gap: 10px;
-    }
-
-    i {
-        margin: 0;
-        font-size: 4.375rem;
-        color: #DFDDDD;
-    }
-
-    h2 {
-        margin: 0;
-        font-weight: 700;
-        color: #DFDDDD;
-        font-size: 1.125rem;
-    }
-    /* Movies */
     .movie {
-        margin-top: 30px;
-        margin-left: 10px;
-        padding: 20px 0;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        border-bottom: 1px solid #E5E7EB;
-        font-size: 0.75rem;
-        font-weight: 400;
-        color: #111827;
-        gap: 1.25rem;
-        width: 500px;
+        max-width: 500px;
     }
 
-    .poster {
-        width: 7rem;
-        aspect-ratio: 5/7;
-    }
-
-    .description {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .desc-top{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .title {
-        color: #000000;
-        font-weight: 500;
-        font-size: 18px;
-    }
-
-    .desc-mid {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .add-movie {
-        display: flex;
-        align-items: center;
-        background: transparent;
-        border: none;
-        font-size: 12px;
-        padding: 0;
-        gap: 2px;
-    }
-
-    .desc-end {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        color: #6B7280;
-    }
-
-
-    /* WATCHLIST CSS */
     .watchlist-container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        margin: 0 auto;
-    }
-    
-    .empty {
-        margin: 0;
-        font-weight: 700;
-        font-size: 1.125rem;
+        justify-items: center;
+        padding: 0 300px;
     }
 
     .watchlist-inner {
         grid-column: 1 / -1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: calc(100vh - 250px);
-        gap: 20px;
-    }
-
-    .watchlist-inner a {
-        color: #363636;
-        font-weight: 700;
-        font-size: 14px;
-        text-decoration: none;
-    }
-
-    .add-container {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .add-icon {
-        width: 1.125rem;
-        height: 1.125rem;
-        border-radius: 50%;
     }
 }
-

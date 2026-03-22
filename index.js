@@ -110,7 +110,7 @@ function searchMovie() {
                         <p>Try searching for something else 🎬</p>
                     </div>
                 `;
-                localStorage.removeItem('lastSearch'); // clear last search if nothing found
+                localStorage.removeItem('lastSearch'); 
             }
         });
 }

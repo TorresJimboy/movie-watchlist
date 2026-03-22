@@ -92,7 +92,7 @@ function searchMovie() {
     })
 }
 
-// ✅ Attach search only if elements exist
+
 if (searchBtn && searchInput) {
     searchBtn.addEventListener('click', searchMovie)
 
